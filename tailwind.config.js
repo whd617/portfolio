@@ -2,7 +2,17 @@
 module.exports = {
   content: [],
   theme: {
-    extend: {},
+    extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            a: {
+              fontStyle: 'normal',
+            },
+          },
+        },
+      },
+    },
   },
   plugins: [],
 };

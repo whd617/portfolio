@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.21",
     "@react-three/drei": "^9.107.2",
     "@react-three/fiber": "^8.16.8",
     "@react-three/postprocessing": "^2.16.2",
@@ -11,6 +14,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/three": "^0.165.0",
     "autoprefixer": "^10.4.19",
+    "gh-pages": "^6.1.1",
     "gltfjsx": "^6.2.18",
     "leva": "^0.9.35",
     "postcss": "^8.4.38",
