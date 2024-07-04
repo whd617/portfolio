@@ -63,11 +63,11 @@ function Home() {
     };
 
     // load 이벤트를 등록하여 페이지 로딩이 완료되면 handleLoad 함수를 실행합니다.
-    window.addEventListener('load', handleLoad);
+    window.addEventListener('DOMContentLoaded', handleLoad);
 
     // 컴포넌트가 언마운트되면 이벤트 리스너를 정리합니다.
     return () => {
-      window.removeEventListener('load', handleLoad);
+      window.removeEventListener('DOMContentLoaded', handleLoad);
     };
   }, []);
 
