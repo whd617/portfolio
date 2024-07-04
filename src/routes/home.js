@@ -3,7 +3,6 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
 import React, { useEffect, useState } from 'react';
 import { HashLoader } from 'react-spinners';
-import { Delivery } from '../renders/Delivery';
 import Box from '@mui/material/Box';
 import CustomModal from '../components/Modal';
 import meImage from '../styles/images/me.jpg';
@@ -21,6 +20,7 @@ import {
   EffectComposer,
   HueSaturation,
 } from '@react-three/postprocessing';
+import { Delivery } from '../renders/Delivery';
 
 function Sphere() {
   useFrame((state, delta) => {
@@ -55,47 +55,6 @@ function Sphere() {
 
 function Home() {
   const [loading, setLoading] = useState(true);
-
-  /* HueSaturation을 사용하기위한 UI*/
-  const { enabled, hue, saturation } = useControls('HueSatureation', {
-    enabled: { value: true },
-    hue: {
-      value: 2.9,
-      min: 0,
-      max: Math.PI,
-      step: 0.1,
-    },
-    saturation: {
-      value: 2.2,
-      min: 0,
-      max: Math.PI,
-      step: 0.1,
-    },
-  });
-
-  /* BrightnessContrast을 사용하기위한 UI*/
-  const { brightness, contrast } = useControls({
-    brightness: {
-      value: 0.2,
-      min: -1,
-      max: 1,
-      step: 0.1,
-    },
-    constrast: {
-      value: 1,
-      min: -1,
-      max: 1,
-      step: 0.1,
-    },
-  });
-
-  const { intensity, mipmapBlur, luminanceThreshold, luminanceSmoothing } =
-    useControls('Bloom', {
-      intensity: { value: 1.88, min: 0, max: 10, step: 0.01 },
-      mipmapBlur: { value: true },
-      luminanceThreshold: { value: 1, min: 0, max: 1, step: 0.01 },
-      luminanceSmoothing: { value: 2, min: 0, max: 2, step: 0.01 },
-    });
 
   useEffect(() => {
     // 페이지 로딩이 완료될 때 초기화 작업을 수행합니다.
@@ -151,19 +110,16 @@ function Home() {
             >
               {/* <OrbitControls /> */}
               <ambientLight color='#ffffff' intensity={10000} />
-              <EffectComposer enabled={enabled}>
-                <HueSaturation hue={hue} saturation={saturation} />
 
-                <BrightnessContrast
-                  brightness={brightness}
-                  contrast={contrast}
-                />
+              <spotLight position={[100, 100, 100]} angle={0.3} penumbra={1} />
 
+              <EffectComposer enableNormalPass enabled={true}>
                 <Bloom
-                  intensity={intensity}
-                  mipmapBlur={mipmapBlur}
-                  luminanceThreshold={luminanceThreshold}
-                  luminanceSmoothing={luminanceSmoothing}
+                  intensity={1.88}
+                  luminanceThreshold={1}
+                  luminanceSmoothing={2}
+                  height={300}
+                  mipmapBlur
                 />
               </EffectComposer>
 
