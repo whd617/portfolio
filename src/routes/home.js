@@ -1,6 +1,3 @@
-import { Canvas, useFrame } from '@react-three/fiber';
-
-import { useControls } from 'leva';
 import React, { useEffect, useState } from 'react';
 import { HashLoader } from 'react-spinners';
 import Box from '@mui/material/Box';
@@ -13,45 +10,6 @@ import mongodbImage from '../styles/images/mongodb.png';
 import mysqlImage from '../styles/images/mysql.png';
 import nodejsImage from '../styles/images/nodejs.png';
 import postgresqlImage from '../styles/images/postgresql.png';
-
-import {
-  Bloom,
-  BrightnessContrast,
-  EffectComposer,
-  HueSaturation,
-} from '@react-three/postprocessing';
-import { Delivery } from '../renders/Delivery';
-
-function Sphere() {
-  useFrame((state, delta) => {
-    const smallSpherePivot = state.scene.getObjectByName('smallSpherePivot');
-    smallSpherePivot.rotation.y += delta;
-  });
-
-  return (
-    <group>
-      <group position={[25, 165, -190]} name='smallSpherePivot'>
-        <mesh
-          castShadow
-          receiveShadow
-          position={[0, 0, 0]}
-          rotationY={(45 * Math.PI) / 180}
-        >
-          <sphereGeometry args={[3, 64, 64]} />
-          <meshStandardMaterial
-            color='#e74c3c'
-            roughness={0.2}
-            metalness={0.5}
-            emissive='#ff4c3c'
-            toneMapped={true}
-            emissiveIntensity={20}
-          />
-          <pointLight color='#ff4c3c' intensity={7} />
-        </mesh>
-      </group>
-    </group>
-  );
-}
 
 function Home() {
   const [loading, setLoading] = useState(true);
@@ -98,37 +56,6 @@ function Home() {
       {/* 로딩이 완료되면 실제 애플리케이션을 렌더링합니다. */}
       {!loading && (
         <div className='relative '>
-          <div className='h-screen max-h-min md:h-full w-full bg-blue-400 relative '>
-            <Canvas
-              shadows
-              camera={{
-                fov: 75,
-                position: [70, -2, 170],
-                near: 2,
-                far: 5000,
-              }}
-            >
-              {/* <OrbitControls /> */}
-              <ambientLight color='#ffffff' intensity={10000} />
-
-              <spotLight position={[100, 100, 100]} angle={0.3} penumbra={1} />
-
-              <EffectComposer enableNormalPass enabled={true}>
-                <Bloom
-                  intensity={1.88}
-                  luminanceThreshold={1}
-                  luminanceSmoothing={2}
-                  height={300}
-                  mipmapBlur
-                />
-              </EffectComposer>
-
-              <Sphere />
-
-              {/* 실제 3D 객체를 렌더링합니다. */}
-              <Delivery scale={50} position={[-50, -260, -120]} />
-            </Canvas>
-          </div>
           {/* Intro 모달 버튼과 콘텐츠 */}
           <div className='h-14 w-64 md:w-80 mx-auto absolute inset-0 m-auto transform -translate-x-20 -translate-y-96  p-3 z-10'>
             <div className='max-w-xs mx-auto border-none'>
