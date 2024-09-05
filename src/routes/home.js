@@ -128,7 +128,7 @@ function Home() {
           </Canvas>
         </div>
         {/* Intro 모달 버튼과 콘텐츠 */}
-        <div className='h-14 w-64 md:w-80 mx-auto absolute inset-0 m-auto transform -translate-x-10 md:-translate-x-20 -translate-y-80 md:-translate-y-72  p-3 z-10'>
+        <div className='h-14 w-64 md:w-80 mx-auto absolute inset-0 m-auto transform -translate-x-10 md:-translate-x-20 -translate-y-80 md:-translate-y-96  p-3 z-10'>
           <div className='max-w-xs mx-auto border-none'>
             <span
               className='inline-block px-2 py-2 text-blue-700 font-semibold rounded-lg shadow-2xl cursor-pointer transition duration-300 text-xl md:text-4xl'
