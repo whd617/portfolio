@@ -1,8 +1,8 @@
 import { Canvas, useFrame } from '@react-three/fiber';
 
 import { useControls } from 'leva';
-import React, { useEffect, useState } from 'react';
-import { HashLoader } from 'react-spinners';
+import React, { /* useEffect,  */ useState } from 'react';
+/* import { HashLoader } from 'react-spinners';
 import Box from '@mui/material/Box';
 import CustomModal from '../components/Modal';
 import meImage from '../styles/images/me.jpg';
@@ -12,7 +12,7 @@ import typescriptImage from '../styles/images/TypeScript.png';
 import mongodbImage from '../styles/images/mongodb.png';
 import mysqlImage from '../styles/images/mysql.png';
 import nodejsImage from '../styles/images/nodejs.png';
-import postgresqlImage from '../styles/images/postgresql.png';
+import postgresqlImage from '../styles/images/postgresql.png'; */
 
 import {
   Bloom,
@@ -21,6 +21,7 @@ import {
   HueSaturation,
 } from '@react-three/postprocessing';
 import { Delivery } from '../renders/Delivery';
+import { OrbitControls } from '@react-three/drei';
 
 function Sphere() {
   useFrame((state, delta) => {
@@ -30,7 +31,7 @@ function Sphere() {
 
   return (
     <group>
-      <group position={[25, 165, -190]} name='smallSpherePivot'>
+      <group position={[500, 1800, -1900]} name='smallSpherePivot'>
         <mesh
           castShadow
           receiveShadow
@@ -54,7 +55,7 @@ function Sphere() {
 }
 
 function Home() {
-  const [loading, setLoading] = useState(true);
+  /* const [loading, setLoading] = useState(true); */
 
   /* useEffect(() => {
     // 페이지 로딩이 완료될 때 초기화 작업을 수행합니다.
@@ -71,17 +72,58 @@ function Home() {
     };
   }, []); */
 
+  /* HueSaturation을 사용하기위한 UI*/
+  const { enabled, hue, saturation } = useControls('HueSatureation', {
+    enabled: { value: true },
+    hue: {
+      value: 2.9,
+      min: 0,
+      max: Math.PI,
+      step: 0.1,
+    },
+    saturation: {
+      value: 2.2,
+      min: 0,
+      max: Math.PI,
+      step: 0.1,
+    },
+  });
+
+  /* BrightnessContrast을 사용하기위한 UI*/
+  const { brightness, contrast } = useControls({
+    brightness: {
+      value: 0.2,
+      min: -1,
+      max: 1,
+      step: 0.1,
+    },
+    constrast: {
+      value: 1,
+      min: -1,
+      max: 1,
+      step: 0.1,
+    },
+  });
+
+  const { intensity, mipmapBlur, luminanceThreshold, luminanceSmoothing } =
+    useControls('Bloom', {
+      intensity: { value: 1.88, min: 0, max: 10, step: 0.01 },
+      mipmapBlur: { value: true },
+      luminanceThreshold: { value: 1, min: 0, max: 1, step: 0.01 },
+      luminanceSmoothing: { value: 2, min: 0, max: 2, step: 0.01 },
+    });
+
   /* Intro Modal */
-  const [isIntroModalOpen, setIsIntroModalOpen] = useState(false);
+  /*   const [isIntroModalOpen, setIsIntroModalOpen] = useState(false);
 
   const openIntroModal = () => setIsIntroModalOpen(true);
-  const closeIntroModal = () => setIsIntroModalOpen(false);
+  const closeIntroModal = () => setIsIntroModalOpen(false); */
 
   /* Intro Modal */
-  const [isSkillModalOpen, setIsSkillModalOpen] = useState(false);
+  /*   const [isSkillModalOpen, setIsSkillModalOpen] = useState(false);
 
   const openSkillModal = () => setIsSkillModalOpen(true);
-  const closeSkillModal = () => setIsSkillModalOpen(false);
+  const closeSkillModal = () => setIsSkillModalOpen(false); */
 
   return (
     <>
@@ -100,24 +142,34 @@ function Home() {
           <Canvas
             shadows
             camera={{
-              fov: 75,
               position: [70, -2, 170],
-              near: 2,
+
               far: 5000,
             }}
           >
-            {/* <OrbitControls /> */}
+            <OrbitControls />
             <ambientLight color='#ffffff' intensity={10000} />
 
             <spotLight position={[100, 100, 100]} angle={0.3} penumbra={1} />
 
             <EffectComposer enableNormalPass enabled={true}>
-              <Bloom
+              {/* <Bloom
                 intensity={1.88}
                 luminanceThreshold={1}
                 luminanceSmoothing={2}
                 height={300}
                 mipmapBlur
+              /> */}
+
+              <HueSaturation hue={hue} saturation={saturation} />
+
+              <BrightnessContrast brightness={brightness} contrast={contrast} />
+
+              <Bloom
+                intensity={intensity}
+                mipmapBlur={mipmapBlur}
+                luminanceThreshold={luminanceThreshold}
+                luminanceSmoothing={luminanceSmoothing}
               />
             </EffectComposer>
 
@@ -128,15 +180,15 @@ function Home() {
           </Canvas>
         </div>
         {/* Intro 모달 버튼과 콘텐츠 */}
-        <div className='h-14 w-64 md:w-80 mx-auto absolute inset-0 m-auto transform -translate-x-10 md:-translate-x-20 -translate-y-80 md:-translate-y-96  p-3 z-10'>
+        <div className='h-14 w-64 md:w-80 mx-auto absolute inset-0 m-auto transform -translate-x-10 md:-translate-x-20 -translate-y-64 md:-translate-y-96  p-3 z-10'>
           <div className='max-w-xs mx-auto border-none'>
-            <span
+            {/* <span
               className='inline-block px-2 py-2 text-blue-700 font-semibold rounded-lg shadow-2xl cursor-pointer transition duration-300 text-xl md:text-4xl'
               onClick={openIntroModal}
             >
               Who Are You?
-            </span>
-            <CustomModal isOpen={isIntroModalOpen} closeModal={closeIntroModal}>
+            </span> */}
+            {/* <CustomModal isOpen={isIntroModalOpen} closeModal={closeIntroModal}>
               <Box sx={{ border: 'none' }}>
                 <div>
                   <div className='bg-blue-100 py-2 flex items-center w-full  h-full'>
@@ -179,12 +231,12 @@ function Home() {
                   </div>
                 </div>
               </Box>
-            </CustomModal>
+            </CustomModal> */}
           </div>
         </div>
         {/* skill 버튼과 콘텐츠 */}
         <div className='h-14 w-52 md:w-80 mx-auto absolute inset-0 m-auto transform translate-y-44 translate-x-24 md:translate-y-44 md:translate-x-32  p-3 z-10'>
-          <div className='max-w-xs mx-auto border-none'>
+          {/* <div className='max-w-xs mx-auto border-none'>
             <span
               className='inline-block text-center px-2 py-2 text-blue-700 font-semibold rounded-lg shadow-2xl cursor-pointer transition duration-300 text-xl md:text-4xl'
               onClick={openSkillModal}
@@ -328,7 +380,7 @@ function Home() {
                 </div>
               </Box>
             </CustomModal>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
