@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/portfolio/static/css/main.79741fc0.css",
-    "main.js": "/portfolio/static/js/main.dcb78ae9.js",
+    "main.js": "/portfolio/static/js/main.dbf7f235.js",
     "static/media/NotoSansKR-VariableFont_wght.ttf": "/portfolio/static/media/NotoSansKR-VariableFont_wght.33752a94ca5252213de8.ttf",
     "static/media/me.jpg": "/portfolio/static/media/me.a5d24fc5ab901f946621.jpg",
     "static/media/mysql.png": "/portfolio/static/media/mysql.167c88550478e6f0f85c.png",
@@ -13,6 +13,6 @@
   },
   "entrypoints": [
     "static/css/main.79741fc0.css",
-    "static/js/main.dcb78ae9.js"
+    "static/js/main.dbf7f235.js"
   ]
 }
